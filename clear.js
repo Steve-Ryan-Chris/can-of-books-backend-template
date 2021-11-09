@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const Book = require('./models/bookModel.js');
 
+// clears database
 async function clear() {
     mongoose.connect(process.env.DB_URL);
     try {
