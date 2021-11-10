@@ -10,6 +10,7 @@ const Book = require('./models/bookModel');
 const app = express();
 app.use(cors());
 
+// connect to mongoose db
 mongoose.connect(process.env.DB_URL, {useNewUrlParser: true, useUnifiedTopology: true});
 
 const db =mongoose.connection;
@@ -20,6 +21,7 @@ db.once('open', function(){
 
 const PORT = process.env.PORT || 3001;
 
+// middleware
 app.get('/test', (request, response) => {
 
   response.send('test request received')
@@ -30,7 +32,7 @@ app.get('/books', handleGetBooks);
 app.post('/books', handlePostBooks); 
 app.delete('/books', handleDeleteBooks); 
 
-
+// get request
 async function handleGetBooks(req, res){
   let  queryObj = {};
   if (req.query.status) {
@@ -49,6 +51,7 @@ async function handleGetBooks(req, res){
   }
 }
 
+<<<<<<< chrisBranchDayOne
 async function handlePostBooks(req, res) {
   try {
     console.log(req.body);
@@ -75,4 +78,7 @@ async function handleDeleteBooks(req, res) {
 }
 
 
+=======
+// turns on server
+>>>>>>> main
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
