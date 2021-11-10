@@ -29,6 +29,8 @@ app.get('/test', (request, response) => {
 })
 
 app.get('/books', handleGetBooks); 
+app.post('/books', handlePostBooks); 
+app.delete('/books', handleDeleteBooks); 
 
 // get request
 async function handleGetBooks(req, res){
@@ -49,5 +51,34 @@ async function handleGetBooks(req, res){
   }
 }
 
+<<<<<<< chrisBranchDayOne
+async function handlePostBooks(req, res) {
+  try {
+    console.log(req.body);
+    let newBook = await Book.create(req.body);
+    res.status(201).send(newBook);
+  } catch (e) {
+    res.status(500).send('Error. Book was not created');
+  }
+}
+
+async function handleDeleteBooks(req, res) {
+  const id = req.params.id;
+  try {
+    const deletedBook = await Book.findByIdAndDelete(id);
+    if (deletedBook) {
+      res.status(204).send('Book has been ${} deleted')
+    } else {
+      res.status(404).send('Book ${} was not deleted.')
+    }
+    
+  } catch (e) {
+    res.status(500).send('Server-side error');
+  }
+}
+
+
+=======
 // turns on server
+>>>>>>> main
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
