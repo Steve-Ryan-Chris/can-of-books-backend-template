@@ -51,7 +51,6 @@ async function handleGetBooks(req, res){
   }
 }
 
-<<<<<<< chrisBranchDayOne
 async function handlePostBooks(req, res) {
   try {
     console.log(req.body);
@@ -78,7 +77,4 @@ async function handleDeleteBooks(req, res) {
 }
 
 
-=======
-// turns on server
->>>>>>> main
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
