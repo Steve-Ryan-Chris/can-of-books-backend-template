@@ -9,6 +9,7 @@ const Book = require('./models/bookModel');
 
 const app = express();
 app.use(cors());
+app.use(express.json());
 
 // connect to mongoose db
 mongoose.connect(process.env.DB_URL, {useNewUrlParser: true, useUnifiedTopology: true});
@@ -19,6 +20,7 @@ db.once('open', function(){
   console.log('Mongoose is connected')
 });
 
+// port
 const PORT = process.env.PORT || 3001;
 
 // modules
@@ -26,43 +28,17 @@ const proofOfLife=require("./modules/proof.js");
 const testing = require('./modules/test');
 
 const handleGetBooks = require('./modules/getBooks');
+const handlePostBook = require('./modules/postBook');
 
 // middleware
 app.get('/test', testing);
 app.get('/', proofOfLife); 
 
 app.get('/books', handleGetBooks); 
-app.post('/books', handlePostBooks); 
+app.post('/books', handlePostBook);
+
 app.delete('/books', handleDeleteBooks); 
 
-// get request
-// async function handleGetBooks(req, res){
-//   let  queryObj = {};
-//   if (req.query.status) {
-//     queryObj = {status: req.query.status}
-//   }
-//   try {
-//     let booksFromDB = await Book.find({});
-//     if (booksFromDB) {
-//     res.status(200).send(booksFromDB);
-//     } else {
-//       res.status(404).send('no books are available at this time.')
-//     }
-//     } catch (e) {
-//     console.error(e);
-//     res.status(500).send('sever error')
-//   }
-// }
-
-async function handlePostBooks(req, res) {
-  try {
-    console.log(req.body);
-    let newBook = await Book.create(req.body);
-    res.status(201).send(newBook);
-  } catch (e) {
-    res.status(500).send('Error. Book was not created');
-  }
-}
 
 async function handleDeleteBooks(req, res) {
   const id = req.params.id;
@@ -79,5 +55,5 @@ async function handleDeleteBooks(req, res) {
   }
 }
 
-
+// activates server
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
