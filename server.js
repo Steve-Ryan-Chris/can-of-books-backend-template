@@ -21,35 +21,38 @@ db.once('open', function(){
 
 const PORT = process.env.PORT || 3001;
 
+// modules
+const proofOfLife=require("./modules/proof.js");
+const testing = require('./modules/test');
+
+const handleGetBooks = require('./modules/getBooks');
+
 // middleware
-app.get('/test', (request, response) => {
-
-  response.send('test request received')
-
-})
+app.get('/test', testing);
+app.get('/', proofOfLife); 
 
 app.get('/books', handleGetBooks); 
 app.post('/books', handlePostBooks); 
 app.delete('/books', handleDeleteBooks); 
 
 // get request
-async function handleGetBooks(req, res){
-  let  queryObj = {};
-  if (req.query.status) {
-    queryObj = {status: req.query.status}
-  }
-  try {
-    let booksFromDB = await Book.find({});
-    if (booksFromDB) {
-    res.status(200).send(booksFromDB);
-    } else {
-      res.status(404).send('no books are available at this time.')
-    }
-    } catch (e) {
-    console.error(e);
-    res.status(500).send('sever error')
-  }
-}
+// async function handleGetBooks(req, res){
+//   let  queryObj = {};
+//   if (req.query.status) {
+//     queryObj = {status: req.query.status}
+//   }
+//   try {
+//     let booksFromDB = await Book.find({});
+//     if (booksFromDB) {
+//     res.status(200).send(booksFromDB);
+//     } else {
+//       res.status(404).send('no books are available at this time.')
+//     }
+//     } catch (e) {
+//     console.error(e);
+//     res.status(500).send('sever error')
+//   }
+// }
 
 async function handlePostBooks(req, res) {
   try {
