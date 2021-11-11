@@ -8,7 +8,7 @@ async function seed() {
     const seedBookOne = new Book ({
         title: 'The Gunslinger',
         description: 'A post apocalyptic take of wizards, gunslingers, and the chase for the rose.',
-        status: true,
+        status: 'read',
         email:'harden.christopher00@gmail.com',
     });
     await seedBookOne.save(function (err) {
@@ -23,7 +23,7 @@ async function seed() {
     await Book.create({
         title: 'Heroes Die',
         description: 'In the future, the entertainment of choice ois to watch actor teleport to a parallel world and risk life and limb living out their lives in a land of monsters, magic and living gods.',
-        status: false,
+        status: 'unread',
         email:'harden.christopher00@gmail.com',
     });
     console.log('Saved Heroes Die');
@@ -31,7 +31,7 @@ async function seed() {
      await Book.create({
         title: 'Blood Men',
         description: 'Edward is a psychologist whos father is a famous serial killer. When Edwards son is kidnaped will he become just like his father and kill in the name of family.',
-        status: true,
+        status: 'read',
         email:'harden.christopher00@gmail.com',
     });
     console.log('Saved Blood Men');
