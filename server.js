@@ -30,6 +30,7 @@ const testing = require('./modules/test');
 const handleGetBooks = require('./modules/getBooks');
 const handlePostBook = require('./modules/postBook');
 const handleDeleteBook = require('./modules/deleteBook');
+const handlePutBook = require('./modules/PutBook');
 
 // middleware
 app.get('/test', testing);
@@ -38,6 +39,7 @@ app.get('/', proofOfLife);
 app.get('/books', handleGetBooks); 
 app.post('/books', handlePostBook);
 app.delete('/books/:id', handleDeleteBook); 
+app.put('/books/:id' , handlePutBook);
 
 // activates server
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
