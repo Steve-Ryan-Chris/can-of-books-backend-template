@@ -41,5 +41,18 @@ app.post('/books', handlePostBook);
 app.delete('/books/:id', handleDeleteBook); 
 app.put('/books/:id' , handlePutBook);
 
+//Auth
+function getUser(req, res) {
+
+VerifyUser(req, (err, user) => {
+  if (err) {
+    res.send('invalid user');
+  } else {
+    res.send(user);
+  }
+})
+}
+
+
 // activates server
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
